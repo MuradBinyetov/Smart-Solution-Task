@@ -90,7 +90,11 @@ namespace SmartSolutionTask.Controllers
 
             if (ModelState.IsValid) success = await _userService.AddUserWithRoleAsync(viewModel, role);
 
-            if (success)
+            if(success && currentUserRole[0] == "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (success)
             {
                 return RedirectToAction("Login", "Account");
             }

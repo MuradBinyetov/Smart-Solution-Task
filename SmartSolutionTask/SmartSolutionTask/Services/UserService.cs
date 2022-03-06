@@ -64,6 +64,7 @@ namespace SmartSolutionTask.Services
             bool roleExists = await _roleManager.RoleExistsAsync(role);
             if (!roleExists) return false;
 
+            
             var user = new ApplicationUser
             {
                 Name =  (role == SystemRoles.WorkerRole ? viewModel.Name : viewModel.OrganizationName),   
@@ -72,9 +73,11 @@ namespace SmartSolutionTask.Services
                 Email = viewModel.Email,
                 IsDeleted = false,
                 HasAccessToLogin = true
-            }; 
+            };
 
-            IdentityResult result = await _userManager.CreateAsync(user, viewModel.Password);
+            //All Worker user must be default password 
+            string password = (role == SystemRoles.WorkerRole ? "worker1234" : viewModel.Password);
+            IdentityResult result = await _userManager.CreateAsync(user, password);
             if (!result.Succeeded) return false;
             ApplicationUser createdUser = await _userManager.FindByNameAsync(user.UserName);
             IdentityResult roleAddingResult = await _userManager.AddToRoleAsync(createdUser, role);
