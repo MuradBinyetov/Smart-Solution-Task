@@ -9,6 +9,12 @@ namespace SmartSolutionTask.Models
     {
         public const string Admin = "Admin";
         public const string OrganizationRole = "Organization";
-        public const string WorkerRole = "Organization";
+        public const string WorkerRole = "Worker";
+
+
+        public static readonly IList<string> AllRoles = new List<string>
+        {
+            Admin, OrganizationRole, WorkerRole
+        };
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using SmartSolutionTask.Data;
 using SmartSolutionTask.Models;
+using SmartSolutionTask.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,13 +76,16 @@ namespace SmartSolutionTask
                 .AddViewLocalization();
 
             services.AddControllersWithViews();
-             
+
+            services.AddScoped<IUserService, UserService>();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager,
-                    RoleManager<ApplicationRole> roleManager)
+        public void Configure(IApplicationBuilder app,
+                        IWebHostEnvironment env,
+                        UserManager<ApplicationUser> userManager,
+                        RoleManager<ApplicationRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -92,9 +96,13 @@ namespace SmartSolutionTask
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
-            }  
+            }
 
-            app.UseHttpsRedirection();
+            // add required roles
+            AppDbInitializer.SeedRolesAsync(roleManager).Wait();
+            AppDbInitializer.SeedDefaultUserAndRoleAsync(userManager, roleManager).Wait();
+
+           // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
