@@ -74,8 +74,21 @@ namespace SmartSolutionTask.Controllers
         public async Task<IActionResult> SignUp(AccountViewModel viewModel)
         {
             bool success = false;
+            string role = string.Empty;
             if (viewModel == null) viewModel = new AccountViewModel();
-            if (ModelState.IsValid) success = await _userService.AddUserWithRoleAsync(viewModel, SystemRoles.OrganizationRole);
+            ApplicationUser currentUser = _userService.GetAuthorizedUserAsync(User).GetAwaiter().GetResult();
+
+            var currentUserRole = _userService.GetUserRolesAsync(currentUser).GetAwaiter().GetResult();
+            if(currentUserRole[0] == "Admin")
+            {
+                role = SystemRoles.WorkerRole;
+            }
+            else if(currentUserRole[0] == "Organization")
+            {
+                role = SystemRoles.OrganizationRole;
+            }
+
+            if (ModelState.IsValid) success = await _userService.AddUserWithRoleAsync(viewModel, role);
 
             if (success)
             {
@@ -100,7 +113,7 @@ namespace SmartSolutionTask.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
             HttpContext.Session.Clear();
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
     }
 }

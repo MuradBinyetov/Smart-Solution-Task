@@ -1,6 +1,9 @@
-﻿
+﻿@using SmartSolutionTask.Services
+@using Microsoft.AspNetCore.Identity 
+@inject UserManager<ApplicationUser> _userManager
 @{
     Layout = null;
+    var user = await _userManager.GetUserAsync(User); 
 }
 
 <!DOCTYPE html>
@@ -12,22 +15,27 @@
 </head>
 <body>
     <p>Hello,index page</p>
-    <a asp-controller="Account" asp-action="Login">Login</a>
-    <a asp-controller="Account" asp-action="SignUp">Sign Up</a>
+    @if (user == null)
+    {
+        <a asp-controller="Account" asp-action="Login">Login</a>
+        <a asp-controller="Account" asp-action="SignUp">Sign Up</a>
+    } 
 
     @if (User.IsInRole(SystemRoles.Admin))
     {
         <a asp-controller="Account" asp-action="SignUp">Create User</a>
     }
 
-    <div class="logout_block" style="">
-        <form asp-controller="Account" asp-action="Logout" method="post">
-            <a style="top: 0; position: relative" href="#" onclick="$(this).parents('form').submit()">
-                <h5 class="logout_link" style="">Log Out</h5>
-            </a>
-        </form>
-    </div>
-
+    @if (user != null)
+    {
+        <div class="logout_block" style="">
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                <a style="top: 0; position: relative" href="#" onclick="$(this).parents('form').submit()">
+                    <h5 class="logout_link" style="">Log Out</h5>
+                </a>
+            </form>
+        </div>
+    }
 
     <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
 </body>

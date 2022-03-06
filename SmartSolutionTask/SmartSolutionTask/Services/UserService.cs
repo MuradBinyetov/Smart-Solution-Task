@@ -5,6 +5,7 @@ using SmartSolutionTask.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SmartSolutionTask.Services
@@ -65,7 +66,8 @@ namespace SmartSolutionTask.Services
 
             var user = new ApplicationUser
             {
-                Name = viewModel.OrganizationName,  
+                Name =  (role == SystemRoles.WorkerRole ? viewModel.Name : viewModel.OrganizationName),   
+                Surname = (role == SystemRoles.WorkerRole ? viewModel.Surname : null),
                 UserName = viewModel.Username,
                 Email = viewModel.Email,
                 IsDeleted = false,
@@ -91,6 +93,11 @@ namespace SmartSolutionTask.Services
             if (string.IsNullOrEmpty(login)) return false;
             return _dbContext.Users.SingleOrDefault(u => u.UserName.Equals(login)) != null;
         }
+
+        public Task<ApplicationUser> GetAuthorizedUserAsync(ClaimsPrincipal user)
+        {
+            return _userManager.GetUserAsync(user);
+        } 
     }
 
 
@@ -103,5 +110,6 @@ namespace SmartSolutionTask.Services
         Task<bool> AddUserWithRoleAsync(AccountViewModel viewModel, string role);
         bool EmailExists(string email);
         bool UserNameExists(string userName);
+        Task<ApplicationUser> GetAuthorizedUserAsync(ClaimsPrincipal user); 
     }
 }
