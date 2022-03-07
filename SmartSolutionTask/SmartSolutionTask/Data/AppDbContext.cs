@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Task = SmartSolutionTask.Models.Task;
 
 namespace SmartSolutionTask.Data
 {
@@ -15,6 +16,9 @@ namespace SmartSolutionTask.Data
 
         public new DbSet<ApplicationUser> Users { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<UserTask> UserTasks { get; set; }
+        public DbSet<ApplicationUserRole> ApplicationUserRoles { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         } 
@@ -29,6 +33,17 @@ namespace SmartSolutionTask.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<UserTask>()
+               .HasKey(ut => new { ut.TaskId, ut.ApplicationUserId });
+            builder.Entity<UserTask>()
+                .HasOne(ut => ut.ApplicationUser)
+                .WithMany(a => a.UserTasks)
+                .HasForeignKey(i => i.ApplicationUserId);
+            builder.Entity<UserTask>()
+                .HasOne(ut => ut.Task)
+                .WithMany(t => t.UserTasks)
+                .HasForeignKey(t => t.TaskId);
         }
     }
 }

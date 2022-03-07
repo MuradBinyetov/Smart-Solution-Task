@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartSolutionTask.Data;
 
 namespace SmartSolutionTask.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220307075946_TaskModelCreatedd")]
+    partial class TaskModelCreatedd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,21 +259,6 @@ namespace SmartSolutionTask.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("SmartSolutionTask.Models.UserTask", b =>
-                {
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("TaskId", "ApplicationUserId");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("UserTasks");
-                });
-
             modelBuilder.Entity("SmartSolutionTask.Models.ApplicationRole", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
@@ -367,21 +354,6 @@ namespace SmartSolutionTask.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SmartSolutionTask.Models.UserTask", b =>
-                {
-                    b.HasOne("SmartSolutionTask.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("UserTasks")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SmartSolutionTask.Models.Task", "Task")
-                        .WithMany("UserTasks")
-                        .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

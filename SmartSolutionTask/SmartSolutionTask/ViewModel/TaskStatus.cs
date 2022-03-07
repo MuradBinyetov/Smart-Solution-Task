@@ -7,7 +7,8 @@ namespace SmartSolutionTask.ViewModel
 {
     public enum TaskStatus
     {
-        Prepared,
-        Finished
+        Appointed, // təyin edildi
+        Prepared,  // hazırlanır 
+        Finished   // tamamlandı 
     }
 }

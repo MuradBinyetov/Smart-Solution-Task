@@ -16,7 +16,7 @@ namespace SmartSolutionTask.Data
 
 
 
-        public static async Task SeedDefaultUserAndRoleAsync(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public static async System.Threading.Tasks.Task SeedDefaultUserAndRoleAsync(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             IdentityResult roleCreated;
             if (await roleManager.FindByNameAsync(DefaultRole) == null)

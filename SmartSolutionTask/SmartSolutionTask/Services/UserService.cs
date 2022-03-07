@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SmartSolutionTask.Data;
 using SmartSolutionTask.Models;
 using SmartSolutionTask.ViewModel;
@@ -101,6 +102,12 @@ namespace SmartSolutionTask.Services
         {
             return _userManager.GetUserAsync(user);
         } 
+
+        public List<ApplicationUserRole> GetWorkerUsers()
+        {
+            IQueryable<ApplicationUserRole> appUserRoles = _dbContext.ApplicationUserRoles.Where(ur => ur.Role.Equals(SystemRoles.WorkerRole));
+            return appUserRoles.ToList();
+        }
     }
 
 
@@ -113,6 +120,7 @@ namespace SmartSolutionTask.Services
         Task<bool> AddUserWithRoleAsync(AccountViewModel viewModel, string role);
         bool EmailExists(string email);
         bool UserNameExists(string userName);
-        Task<ApplicationUser> GetAuthorizedUserAsync(ClaimsPrincipal user); 
+        Task<ApplicationUser> GetAuthorizedUserAsync(ClaimsPrincipal user);
+        List<ApplicationUserRole> GetWorkerUsers();
     }
 }

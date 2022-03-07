@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartSolutionTask.Controllers
 {
-    public class Home : Controller
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {

@@ -26,6 +26,13 @@
         <a asp-controller="Account" asp-action="SignUp">Create User</a>
     }
 
+    @if (User.IsInRole(SystemRoles.OrganizationRole)) 
+    { 
+        <div>
+            <a asp-controller="Task" asp-action="Create">Create Task</a>
+        </div>
+    }
+
     @if (user != null)
     {
         <div class="logout_block" style="">

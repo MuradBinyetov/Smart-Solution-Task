@@ -133,7 +133,6 @@ C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\bi
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\SmartSolutionTask.csproj.AssemblyReference.cache
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\SmartSolutionTask.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\SmartSolutionTask.AssemblyInfoInputs.cache
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\SmartSolutionTask.AssemblyInfo.cs
@@ -233,3 +232,6 @@ C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\bi
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Account\SignUp.cshtml.g.cs
+C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\SmartSolutionTask.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Task\Create.cshtml.g.cs
+C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Task\Index.cshtml.g.cs

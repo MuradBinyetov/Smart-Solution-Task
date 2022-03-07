@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220307075358_TaskModelCreated.cs" />
+    <Compile Remove="Migrations\20220307075358_TaskModelCreated.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\images\create_new_account-512.webp" />
     <Content Remove="wwwroot\images\favicon.ico" />
   </ItemGroup>
@@ -12,8 +17,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.22" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.22">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.21">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

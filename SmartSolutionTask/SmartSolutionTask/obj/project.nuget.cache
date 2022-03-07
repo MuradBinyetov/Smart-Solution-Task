@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zjZUAOqi6VtgnEF3h1aKCPOtOfmu9QQ7an6Ow641dPD9lWDa05vT6LBdnmh2VPfUgSwNKk3UAq/GeQkaUKAWVQ==",
+  "dgSpecHash": "rx8sRxsk9/p+dGDMSKBiCT6kFoJ6d7AngY5eDXdP545mTCbfQ76gnJoXU9cuWAidS2tUYZVKUIvTHFmQhh9ibw==",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\Desktop\\Smart-Solution-Task\\SmartSolutionTask\\SmartSolutionTask\\SmartSolutionTask.csproj",
   "expectedPackageFiles": [
@@ -24,10 +24,10 @@
     "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore\\3.1.22\\microsoft.entityframeworkcore.3.1.22.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\3.1.22\\microsoft.entityframeworkcore.abstractions.3.1.22.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\3.1.22\\microsoft.entityframeworkcore.analyzers.3.1.22.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.design\\3.1.22\\microsoft.entityframeworkcore.design.3.1.22.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.design\\3.1.21\\microsoft.entityframeworkcore.design.3.1.21.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\3.1.22\\microsoft.entityframeworkcore.relational.3.1.22.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\3.1.22\\microsoft.entityframeworkcore.sqlserver.3.1.22.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\3.1.22\\microsoft.entityframeworkcore.tools.3.1.22.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\3.1.21\\microsoft.entityframeworkcore.sqlserver.3.1.21.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\3.1.21\\microsoft.entityframeworkcore.tools.3.1.21.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\3.1.22\\microsoft.extensions.caching.abstractions.3.1.22.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.caching.memory\\3.1.22\\microsoft.extensions.caching.memory.3.1.22.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.22\\microsoft.extensions.configuration.3.1.22.nupkg.sha512",

@@ -78,6 +78,7 @@ namespace SmartSolutionTask
             services.AddControllersWithViews();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITaskService, TaskService>();
 
         }
 
