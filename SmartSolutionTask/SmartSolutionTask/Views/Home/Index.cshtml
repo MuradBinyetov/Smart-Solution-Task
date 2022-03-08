@@ -67,26 +67,19 @@
         </div>
     }
 
-    @if (User.IsInRole(SystemRoles.Admin) && organizations != null &&organizations.Any())
-    {
-        <div>
-            <a asp-controller="Account" asp-action="SignUp">Create User</a>
-        </div>
-    }
-
-    @if (User.IsInRole(SystemRoles.OrganizationRole))
-    {
-        <div>
-            <a asp-controller="Task" asp-action="Index" asp-route-id ="@user.OrganizationId">My Tasks</a>
-        </div>
-    }
-
     @if (user != null)
-    {  
+    {
         <div class="profile">
+
+            @if (User.IsInRole(SystemRoles.Admin) && organizations != null && organizations.Any())
+            {
+                <div>
+                    <a asp-controller="Account" asp-action="SignUp">Create User</a>
+                </div>
+            }
             @if (User.IsInRole(SystemRoles.WorkerRole))
             {
-                <div style="jus">
+                <div>
                     <a asp-action="Index" asp-controller="Task" asp-route-id="@user.OrganizationId" style="top: 0; position: relative">
                         <h4 class="logout_link" style="">My Organization All Tasks</h4>
                     </a>
@@ -95,6 +88,12 @@
                     <a asp-action="Profile" asp-controller="Account" asp-route-id="@user.Id" style="top: 0; position: relative">
                         <h4 class="logout_link" style="">My Profile</h4>
                     </a>
+                </div>
+            }
+            @if (User.IsInRole(SystemRoles.OrganizationRole))
+            {
+                <div>
+                    <a asp-controller="Task" asp-action="Index" asp-route-id="@user.OrganizationId">My All Tasks</a>
                 </div>
             }
 

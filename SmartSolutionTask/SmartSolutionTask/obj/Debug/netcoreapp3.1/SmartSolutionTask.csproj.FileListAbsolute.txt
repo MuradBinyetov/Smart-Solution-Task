@@ -236,3 +236,7 @@ C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\ob
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Task\Create.cshtml.g.cs
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Task\Index.cshtml.g.cs
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Account\Profile.cshtml.g.cs
+C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\bin\Debug\netcoreapp3.1\NETCore.MailKit.dll
+C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll

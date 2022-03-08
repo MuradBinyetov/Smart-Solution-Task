@@ -16,11 +16,15 @@ namespace SmartSolutionTask.Services
     {
             private readonly AppDbContext _context;
             private readonly IUserService _userService;
+            private readonly IEmailService _emailService;
+            private readonly IOrganizationService _organizationService;
 
-            public TaskService(AppDbContext context, IUserService userService)
+            public TaskService(AppDbContext context, IUserService userService, IEmailService emailService, IOrganizationService organizationService)
             {
                 _context = context;
                 _userService = userService;
+                _emailService = emailService;
+                _organizationService = organizationService;
             }
 
         public List<Task> GetTasks(int id)
@@ -43,6 +47,11 @@ namespace SmartSolutionTask.Services
                 UserTasks = new Collection<UserTask> ()
             };
 
+            Organization organization =  _organizationService.GetOrganizationById(id);
+
+            string emailSubject = "Technical task";
+            string emailBody = $"{organization.Name} has sent you task";
+
             List<string> workerUserIds = viewModel.UserIds;
             if(workerUserIds != null)
             {
@@ -54,6 +63,7 @@ namespace SmartSolutionTask.Services
                         ApplicationUser = user                        
                     };
                     task.UserTasks.Add(userTask);
+                    _emailService.Send(user.Email, emailSubject, emailBody);
                 } 
             }
             _context.Tasks.Add(task);

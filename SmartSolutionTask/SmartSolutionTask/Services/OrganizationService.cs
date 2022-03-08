@@ -27,10 +27,17 @@ namespace SmartSolutionTask.Services
             List<Organization> organizations = _context.Organizations.ToList();
             return organizations;
         }
+
+        public Organization GetOrganizationById(int? id)
+        { 
+            Organization organization = _context.Organizations.FirstOrDefault(o => o.Id == id);
+            return organization; 
+        }
     }
     public interface IOrganizationService
     {
         List<Organization> GetAllOrganizations();
         bool HasOrganization(int id);
+        Organization GetOrganizationById(int? id);
     }
 }
