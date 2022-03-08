@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace SmartSolutionTask.Models
 {
     public class ApplicationUser : IdentityUser
-    {
-
+    { 
         [StringLength(255)] 
         public string Name { get; set; }
 
@@ -21,5 +20,7 @@ namespace SmartSolutionTask.Models
         public DateTime? LastLoginDate { get; set; } 
 
         public ICollection<UserTask> UserTasks { get; set; }
+        public Organization Organization { get; set; }
+        public int? OrganizationId { get; set; }
     }
 }

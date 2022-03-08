@@ -73,8 +73,22 @@ namespace SmartSolutionTask.Services
                 UserName = viewModel.Username,
                 Email = viewModel.Email,
                 IsDeleted = false,
-                HasAccessToLogin = true
+                HasAccessToLogin = true,
+                Organization = (role == SystemRoles.WorkerRole ? null : new Organization()),
+                OrganizationId = (role == SystemRoles.WorkerRole ? viewModel.OrganizationId : null),
             };
+
+            if (role == SystemRoles.OrganizationRole)
+            {
+                Organization organization = new Organization()
+                {
+                    Name = viewModel.OrganizationName,
+                    Address = viewModel.Address,
+                    PhoneNumber = viewModel.PhoneNumber
+                };
+
+                user.Organization = organization;
+            } 
 
             //All Worker user must be default password 
             string password = (role == SystemRoles.WorkerRole ? "worker1234" : viewModel.Password);

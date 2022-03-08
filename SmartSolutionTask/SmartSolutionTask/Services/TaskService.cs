@@ -14,22 +14,22 @@ namespace SmartSolutionTask.Services
 {
     public class TaskService : ITaskService
     {
-        private readonly AppDbContext _context;
-        private readonly IUserService _userService;
+            private readonly AppDbContext _context;
+            private readonly IUserService _userService;
 
-        public TaskService(AppDbContext context, IUserService userService)
-        {
-            _context = context;
-            _userService = userService;
-        }
+            public TaskService(AppDbContext context, IUserService userService)
+            {
+                _context = context;
+                _userService = userService;
+            }
 
-        public List<Task> GetTasks()
+        public List<Task> GetTasks(int id)
         {
-            List<Task> tasks = _context.Tasks.ToList();
+            List<Task> tasks = _context.Tasks.Where(t=>t.OrganizationId == id).ToList();
             return tasks;
         }
 
-        public bool CreateTask(TaskViewModel viewModel)
+        public bool CreateTask(TaskViewModel viewModel,int id)
         {
             if (viewModel == null) return false;
 
@@ -39,15 +39,16 @@ namespace SmartSolutionTask.Services
                 Description = viewModel.Description,
                 Deadline = viewModel.Deadline,
                 TaskStatus = TaskStatus.Appointed.ToString(),
+                OrganizationId = id,
                 UserTasks = new Collection<UserTask> ()
             };
 
             List<string> workerUserIds = viewModel.UserIds;
             if(workerUserIds != null)
             {
-                foreach (var id in workerUserIds)
+                foreach (var userId in workerUserIds)
                 {
-                    ApplicationUser user = _userService.GetById(id).GetAwaiter().GetResult();
+                    ApplicationUser user = _userService.GetById(userId).GetAwaiter().GetResult();
                     UserTask userTask = new UserTask()
                     {
                         ApplicationUser = user                        
@@ -73,8 +74,8 @@ namespace SmartSolutionTask.Services
 
     public interface ITaskService
     {
-        List<Task> GetTasks();
-        bool CreateTask(TaskViewModel viewModel);
+        List<Task> GetTasks(int id);
+        bool CreateTask(TaskViewModel viewModel,int id);
         List<UserTask> GetTasksByUserId(string id);
     }
 }

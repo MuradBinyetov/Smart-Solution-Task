@@ -16,5 +16,11 @@ namespace SmartSolutionTask.Models
         public string TaskStatus { get; set; } 
         public ICollection<UserTask> UserTasks { get; set; }
 
+        public Organization Organization { get; set; }
+        public int? OrganizationId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
+
     }
 }

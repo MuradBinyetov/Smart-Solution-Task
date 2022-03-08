@@ -19,6 +19,7 @@ namespace SmartSolutionTask.Data
         public DbSet<Task> Tasks { get; set; }
         public DbSet<UserTask> UserTasks { get; set; }
         public DbSet<ApplicationUserRole> ApplicationUserRoles { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         } 

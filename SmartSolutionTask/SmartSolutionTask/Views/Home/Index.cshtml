@@ -1,9 +1,10 @@
-﻿@using SmartSolutionTask.Services
+﻿@model HomeViewModel
 @using Microsoft.AspNetCore.Identity
-@inject UserManager<ApplicationUser> _userManager
+@inject UserManager<ApplicationUser> _userManager 
 @{
     Layout = null;
     var user = await _userManager.GetUserAsync(User);
+    List<Organization> organizations = Model?.Organizations;
 }
 
 <!DOCTYPE html>
@@ -46,6 +47,10 @@
         .login div{
             margin-left:10px;
         }
+        .profile {
+            display: flex;
+            justify-content: space-between;
+        } 
     </style>
 </head>
 <body>
@@ -56,43 +61,53 @@
             <div>
                 <a asp-controller="Account" asp-action="Login">Login</a>
             </div>
-           <div>
-               <a asp-controller="Account" asp-action="SignUp">Sign Up</a>
-           </div> 
+            <div>
+                <a asp-controller="Account" asp-action="SignUp">Sign Up</a>
+            </div>
         </div>
     }
-    else
-    {
 
-    }
-
-    @if (User.IsInRole(SystemRoles.Admin))
+    @if (User.IsInRole(SystemRoles.Admin) && organizations != null &&organizations.Any())
     {
-        <a asp-controller="Account" asp-action="SignUp">Create User</a>
+        <div>
+            <a asp-controller="Account" asp-action="SignUp">Create User</a>
+        </div>
     }
 
     @if (User.IsInRole(SystemRoles.OrganizationRole))
     {
         <div>
-            <a asp-controller="Task" asp-action="Index">My Tasks</a>
+            <a asp-controller="Task" asp-action="Index" asp-route-id ="@user.OrganizationId">My Tasks</a>
         </div>
     }
 
     @if (user != null)
-    {
-        <div>
-            <a asp-action="Profile" asp-controller="Account" asp-route-id="@user.Id" style="top: 0; position: relative">
-                <h5 class="logout_link" style="">My Profile</h5>
-            </a>
+    {  
+        <div class="profile">
+            @if (User.IsInRole(SystemRoles.WorkerRole))
+            {
+                <div style="jus">
+                    <a asp-action="Index" asp-controller="Task" asp-route-id="@user.OrganizationId" style="top: 0; position: relative">
+                        <h4 class="logout_link" style="">My Organization All Tasks</h4>
+                    </a>
+                </div>
+                <div>
+                    <a asp-action="Profile" asp-controller="Account" asp-route-id="@user.Id" style="top: 0; position: relative">
+                        <h4 class="logout_link" style="">My Profile</h4>
+                    </a>
+                </div>
+            }
+
+
+            <div class="logout_block" style="">
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <a style="top: 0; position: relative" href="#" onclick="$(this).parents('form').submit()">
+                        <h4 class="logout_link" style="">Log Out</h4>
+                    </a>
+                </form>
+            </div>
         </div>
 
-        <div class="logout_block" style="">
-            <form asp-controller="Account" asp-action="Logout" method="post">
-                <a style="top: 0; position: relative" href="#" onclick="$(this).parents('form').submit()">
-                    <h5 class="logout_link" style="">Log Out</h5>
-                </a>
-            </form>
-        </div>
     }
 
 

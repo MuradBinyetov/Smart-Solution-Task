@@ -16,5 +16,7 @@ namespace SmartSolutionTask.Models
         {
             Admin, OrganizationRole, WorkerRole
         };
+
+        public const string AdminOrOrganization = Admin + ", " + OrganizationRole;
     }
 }

@@ -79,6 +79,7 @@ namespace SmartSolutionTask
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IOrganizationService, OrganizationService>();
 
         }
 

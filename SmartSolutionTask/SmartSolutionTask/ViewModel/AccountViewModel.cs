@@ -30,5 +30,7 @@ namespace SmartSolutionTask.ViewModel
         //For Other User 
         public ApplicationUser User { get; set; }
         public List<UserTask> UserTasks { get; set; }
+        public int? OrganizationId { get; set; }
+        public List<Organization> Organizations { get; set; }
     }
 }

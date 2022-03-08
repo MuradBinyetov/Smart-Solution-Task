@@ -12,20 +12,23 @@ using System.Threading.Tasks;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace SmartSolutionTask.Controllers
-{
+{ 
     public class AccountController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUserService _userService;
         private readonly ITaskService _taskService;
+        private readonly IOrganizationService _organizationService;
 
         public AccountController(SignInManager<ApplicationUser> signInManager,
            IUserService userService,
-           ITaskService taskService)
+           ITaskService taskService,
+           IOrganizationService organizationService)
         {
             _signInManager = signInManager;
             _userService = userService;
             _taskService = taskService;
+            _organizationService = organizationService;
         }
 
         [HttpGet]
@@ -68,8 +71,17 @@ namespace SmartSolutionTask.Controllers
 
         [HttpGet] 
         public IActionResult SignUp()
-        { 
-            return View();
+        {
+            if (User.IsInRole(SystemRoles.WorkerRole))
+            {
+                return NotFound();
+            }
+            List<Organization> organizations = _organizationService.GetAllOrganizations();
+            AccountViewModel viewModel = new AccountViewModel
+            {
+                Organizations = organizations
+            };
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -82,18 +94,19 @@ namespace SmartSolutionTask.Controllers
             ApplicationUser currentUser = _userService.GetAuthorizedUserAsync(User).GetAwaiter().GetResult();
 
             var currentUserRole = _userService.GetUserRolesAsync(currentUser).GetAwaiter().GetResult();
-            if(currentUserRole[0] == "Admin")
+            if(currentUserRole != null && currentUserRole[0] == "Admin")
             {
                 role = SystemRoles.WorkerRole;
-            }
-            else if(currentUserRole[0] == "Organization")
+            } 
+            else
             {
                 role = SystemRoles.OrganizationRole;
             }
 
             if (ModelState.IsValid) success = await _userService.AddUserWithRoleAsync(viewModel, role);
 
-            if(success && currentUserRole[0] == "Admin")
+
+            if(success && currentUserRole != null &&  currentUserRole[0] == "Admin")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -123,6 +136,8 @@ namespace SmartSolutionTask.Controllers
             return RedirectToAction("Index","Home");
         }
 
+
+        [Authorize(Roles = SystemRoles.WorkerRole)]
         [HttpGet]
         public async Task<IActionResult> Profile(string id)
         {
