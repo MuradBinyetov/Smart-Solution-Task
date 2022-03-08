@@ -235,3 +235,4 @@ C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\ob
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\SmartSolutionTask.csproj.AssemblyReference.cache
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Task\Create.cshtml.g.cs
 C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Task\Index.cshtml.g.cs
+C:\Users\User\Desktop\Smart-Solution-Task\SmartSolutionTask\SmartSolutionTask\obj\Debug\netcoreapp3.1\Razor\Views\Account\Profile.cshtml.g.cs

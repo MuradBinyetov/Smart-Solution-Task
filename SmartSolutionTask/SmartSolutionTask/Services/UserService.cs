@@ -102,11 +102,16 @@ namespace SmartSolutionTask.Services
         {
             return _userManager.GetUserAsync(user);
         } 
-
-        public List<ApplicationUserRole> GetWorkerUsers()
+        public async Task<IList<ApplicationUser>> GetUsersByRoleAsync(string role)
         {
-            IQueryable<ApplicationUserRole> appUserRoles = _dbContext.ApplicationUserRoles.Where(ur => ur.Role.Equals(SystemRoles.WorkerRole));
-            return appUserRoles.ToList();
+            IList<ApplicationUser> usersByRole = await _userManager.GetUsersInRoleAsync(role);
+            return usersByRole.Where(u => !u.IsDeleted).ToList();
+        }
+        public async Task<ApplicationUser> GetById(string userId)
+        {
+            if (string.IsNullOrEmpty(userId)) return null;
+            ApplicationUser user = await _userManager.FindByIdAsync(userId);
+            return user == null || user.IsDeleted ? null : user;
         }
     }
 
@@ -121,6 +126,7 @@ namespace SmartSolutionTask.Services
         bool EmailExists(string email);
         bool UserNameExists(string userName);
         Task<ApplicationUser> GetAuthorizedUserAsync(ClaimsPrincipal user);
-        List<ApplicationUserRole> GetWorkerUsers();
+        Task<IList<ApplicationUser>> GetUsersByRoleAsync(string role);
+        Task<ApplicationUser> GetById(string userId);
     }
 }

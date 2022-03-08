@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartSolutionTask.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,5 +19,6 @@ namespace SmartSolutionTask.ViewModel
 
         public List<Task> Tasks { get; set; }
         public List<string> UserIds { get; set; }
+        public IList<ApplicationUser> WorkerUsers { get; set; }
     }
 }

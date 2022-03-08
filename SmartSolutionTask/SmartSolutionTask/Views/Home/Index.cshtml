@@ -1,9 +1,9 @@
 ﻿@using SmartSolutionTask.Services
-@using Microsoft.AspNetCore.Identity 
+@using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> _userManager
 @{
     Layout = null;
-    var user = await _userManager.GetUserAsync(User); 
+    var user = await _userManager.GetUserAsync(User);
 }
 
 <!DOCTYPE html>
@@ -12,29 +12,80 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+
+    <style>
+        body {
+            background-color: rgba(27,114,216,.81);
+            background-image: url(images/ddd.d94626bfec4847246a9d.png);
+            background-size: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        .name {
+            margin-top: 10%;
+            text-align: center;
+        }
+        .name img{
+            width:40%;
+        }
+        .name p{
+            color:white;
+        }
+        .login {
+            display: flex;
+            justify-content: end;
+        }
+        .login div{
+            margin-left:10px;
+        }
+    </style>
 </head>
 <body>
-    <p>Hello,index page</p>
+    <h1>My Technical Task</h1>
     @if (user == null)
     {
-        <a asp-controller="Account" asp-action="Login">Login</a>
-        <a asp-controller="Account" asp-action="SignUp">Sign Up</a>
-    } 
+        <div class="login">
+            <div>
+                <a asp-controller="Account" asp-action="Login">Login</a>
+            </div>
+           <div>
+               <a asp-controller="Account" asp-action="SignUp">Sign Up</a>
+           </div> 
+        </div>
+    }
+    else
+    {
+
+    }
 
     @if (User.IsInRole(SystemRoles.Admin))
     {
         <a asp-controller="Account" asp-action="SignUp">Create User</a>
     }
 
-    @if (User.IsInRole(SystemRoles.OrganizationRole)) 
-    { 
+    @if (User.IsInRole(SystemRoles.OrganizationRole))
+    {
         <div>
-            <a asp-controller="Task" asp-action="Create">Create Task</a>
+            <a asp-controller="Task" asp-action="Index">My Tasks</a>
         </div>
     }
 
     @if (user != null)
     {
+        <div>
+            <a asp-action="Profile" asp-controller="Account" asp-route-id="@user.Id" style="top: 0; position: relative">
+                <h5 class="logout_link" style="">My Profile</h5>
+            </a>
+        </div>
+
         <div class="logout_block" style="">
             <form asp-controller="Account" asp-action="Logout" method="post">
                 <a style="top: 0; position: relative" href="#" onclick="$(this).parents('form').submit()">
@@ -43,6 +94,15 @@
             </form>
         </div>
     }
+
+
+    <div _ngcontent-bkv-c3="" class="col-xl-5 name">
+        <img _ngcontent-bkv-c3="" alt="" src="~/images//smart logo.png">
+        <p _ngcontent-bkv-c3="" class="subtitle" localization="">BİZNESİNİZİ GƏLƏCƏYƏ DOĞRU APARIRIQ</p>
+        <div _ngcontent-bkv-c3="" class="button_box w-100">
+            <a _ngcontent-bkv-c3="" class="w-100" href="tel:+994125371558"></a>
+        </div>
+    </div>
 
     <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
 </body>

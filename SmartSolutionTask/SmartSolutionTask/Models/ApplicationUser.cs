@@ -18,7 +18,7 @@ namespace SmartSolutionTask.Models
 
         public bool IsDeleted { get; set; } = false;
         public bool HasAccessToLogin { get; set; } = true; 
-        public DateTime? LastLoginDate { get; set; }
+        public DateTime? LastLoginDate { get; set; } 
 
         public ICollection<UserTask> UserTasks { get; set; }
     }

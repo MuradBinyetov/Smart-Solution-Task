@@ -16,10 +16,12 @@ namespace SmartSolutionTask.Controllers
     public class TaskController : Controller
     {
         private readonly ITaskService _taskService;
+        private readonly IUserService _userService;
 
-        public TaskController(ITaskService taskService)
+        public TaskController(ITaskService taskService, IUserService userService)
         {
             _taskService = taskService;
+            _userService = userService;
         }
 
         public IActionResult Index()
@@ -35,15 +37,20 @@ namespace SmartSolutionTask.Controllers
         // GET: Task/Create
         public IActionResult Create()
         {
-            return View();
+            IList<ApplicationUser> workerUsers = _userService.GetUsersByRoleAsync(SystemRoles.WorkerRole.ToString()).GetAwaiter().GetResult();
+            TaskViewModel viewModel = new TaskViewModel
+            {
+                WorkerUsers = workerUsers
+            };
+            return View(viewModel);
         } 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(TaskViewModel viewModel)
-        { 
-
-            return View();
+        {
+            _taskService.CreateTask(viewModel);
+            return RedirectToAction("Index","Task");
         }         
     }
 }

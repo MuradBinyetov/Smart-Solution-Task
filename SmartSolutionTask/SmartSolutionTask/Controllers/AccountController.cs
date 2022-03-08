@@ -17,12 +17,15 @@ namespace SmartSolutionTask.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUserService _userService;
+        private readonly ITaskService _taskService;
 
         public AccountController(SignInManager<ApplicationUser> signInManager,
-           IUserService userService)
+           IUserService userService,
+           ITaskService taskService)
         {
             _signInManager = signInManager;
-            _userService = userService; 
+            _userService = userService;
+            _taskService = taskService;
         }
 
         [HttpGet]
@@ -118,6 +121,21 @@ namespace SmartSolutionTask.Controllers
             HttpContext.Session.Clear();
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index","Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Profile(string id)
+        {
+            ApplicationUser user = await _userService.GetById(id);
+
+            List<UserTask> userTasks = _taskService.GetTasksByUserId(id);
+
+            AccountViewModel viewModel = new AccountViewModel
+            {
+                User = user,
+                UserTasks = userTasks
+            };
+            return View(viewModel);
         }
     }
 }

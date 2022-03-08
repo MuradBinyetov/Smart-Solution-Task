@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartSolutionTask.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,9 +11,7 @@ namespace SmartSolutionTask.ViewModel
     { 
         [DataType(DataType.Text)]
         public string Username { get; set; }
-
-        [Required(ErrorMessage = "Şifrə daxil edin.")]
-        [DataType(DataType.Password)]
+         
         public string Password { get; set; }
 
         [EmailAddress]
@@ -28,6 +27,8 @@ namespace SmartSolutionTask.ViewModel
         //For Other User
         public string Name { get; set; }
         public string Surname { get; set; }
-        //For Other User
+        //For Other User 
+        public ApplicationUser User { get; set; }
+        public List<UserTask> UserTasks { get; set; }
     }
 }

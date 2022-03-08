@@ -2,6 +2,7 @@
 
 @{
     Layout = null;
+    var workerUsers = Model?.WorkerUsers;
 }
 
 <!DOCTYPE html>
@@ -19,14 +20,14 @@
     <div class="container">
         <h4 style="text-align:center">Create Task</h4>
         <div class="col-md-4">
-            <form>
+            <form asp-action="Create" asp-controller="Task">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Title</label>
                     <input type="text"  asp-for="@Model.Title" class="form-control" id="exampleFormControlInput1">
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea2">Example textarea</label>
-                    <textarea name="@Model?.Description" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+                    <label for="exampleFormControlTextarea2">Description</label>
+                    <textarea asp-for="@Model.Description" class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput3">Deadline</label>
@@ -35,11 +36,13 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect4">Example multiple select</label>
                     <select asp-for="@Model.UserIds" class="form-control" id="exampleFormControlSelect4">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        @if (workerUsers != null)
+                        {
+                            @foreach (var user in workerUsers)
+                            {
+                                <option value="@user.Id">@user.Name @user.Surname</option>
+                            }
+                        } 
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Create Task</button>

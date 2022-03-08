@@ -1,4 +1,5 @@
-﻿using SmartSolutionTask.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartSolutionTask.Data;
 using SmartSolutionTask.Models;
 using SmartSolutionTask.ViewModel;
 using System;
@@ -14,10 +15,12 @@ namespace SmartSolutionTask.Services
     public class TaskService : ITaskService
     {
         private readonly AppDbContext _context;
+        private readonly IUserService _userService;
 
-        public TaskService(AppDbContext context)
+        public TaskService(AppDbContext context, IUserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         public List<Task> GetTasks()
@@ -39,13 +42,39 @@ namespace SmartSolutionTask.Services
                 UserTasks = new Collection<UserTask> ()
             };
 
-            throw new NotImplementedException();
+            List<string> workerUserIds = viewModel.UserIds;
+            if(workerUserIds != null)
+            {
+                foreach (var id in workerUserIds)
+                {
+                    ApplicationUser user = _userService.GetById(id).GetAwaiter().GetResult();
+                    UserTask userTask = new UserTask()
+                    {
+                        ApplicationUser = user                        
+                    };
+                    task.UserTasks.Add(userTask);
+                } 
+            }
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
+            return true;
         } 
+
+        public List<UserTask> GetTasksByUserId(string id)
+        {
+            List<UserTask> tasks = new List<UserTask>();
+            if (id != null)
+            {
+                tasks = _context.UserTasks.Include(ut=>ut.Task).Where(ut => ut.ApplicationUserId == id).ToList();
+            }
+            return tasks;
+        }
     }
 
     public interface ITaskService
     {
         List<Task> GetTasks();
         bool CreateTask(TaskViewModel viewModel);
+        List<UserTask> GetTasksByUserId(string id);
     }
 }
