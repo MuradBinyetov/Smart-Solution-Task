@@ -18,7 +18,7 @@ namespace SmartSolutionTask.Controllers
             _organizationService = organizationService;
         }
         public IActionResult Index()
-        {
+        { 
             List<Organization> organizations = _organizationService.GetAllOrganizations();
             HomeViewModel viewModel = new HomeViewModel()
             {

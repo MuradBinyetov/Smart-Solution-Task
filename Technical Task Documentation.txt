@@ -1,0 +1,31 @@
+
+Existing profiles :
+	
+	1) Administrator(Admin1234) - default user
+	2) SocarUser(socar1234) - Organization User (I created)
+	3) BpUser(bp1234) - Organization User (I created)
+	4) Worker1(worker1234) - Worker User (I created) 
+	5) Worker2(worker1234) - Worker User (I created)
+	6) Worker3(worker1234) - Worker User (I created)  
+
+The default code for Worker accounts is worker1234.
+
+
+When the project is first run, the Login and Signup buttons appear in the upper right corner of the page.
+
+If you want to create a new Organization profile, you can create an Organization profile by clicking signup.
+
+If you want to access an existing Organization profile, you can log in by clicking the Login button.
+
+If you want to create new worker accounts, log in with Admin and click CreateUser.
+
+Admin creates a new worker account , he must link it to the Organization.
+
+Organization creates a new task, the task can be assigned to multiple employees.
+
+Employee is given a new task, an email is sent to his account from the default account I created.
+
+Worker accounts can access their profiles and see all the tasks of the Organization to which they are connected.
+
+
+
